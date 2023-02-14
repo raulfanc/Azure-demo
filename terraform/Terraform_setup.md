@@ -8,7 +8,18 @@ Specify the Subscription to use via terminal (my demo id): `az account set --sub
 ## create 
 - Provider
 - Resource Group: # Create Resouce Group named "wsp_demo_RG"
-- Azure Storage account: # Create storage account (Data lake) named "rawdata_sa"
+- Azure Storage account: # Create storage account (Data lake) named "datalakegen2wsp123"
 
+## waiting for build
+1. Data Lake
+2. Azure Functions
+3. Azure Data Factory
+4. Event Hub
+5. Logic App
+6. Databricks
+7. Cosmos DB
+8. API management
+9. Azure Active Directory
+10. App Registration
 
 
