@@ -40,39 +40,41 @@ Using [Terraform](Terraform) to set up Azure Infrastructure and Resources.
 ---
 ## Event Hubs
 
-- loading Libs Python
+1. loading Libs Python
 ``` bash
 pip install azure-eventhub
 pip install azure-identity
 pip install aiohttp
 ```
 
-- Authentication
-1. [ADD](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-python-get-started-send?tabs=passwordless%2Croles-azure-cli#tabpanel_1_passwordless) (real-world application)
+2. Authentication
 
-- retrieve the resource ID
+2.1. [ADD](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-python-get-started-send?tabs=passwordless%2Croles-azure-cli#tabpanel_1_passwordless) (real-world application)
+
+retrieve the resource ID
 ```cli
 az servicebus namespace show -g '<your-event-hub-resource-group>' -n '<your-event-hub-name> --query id
 ```
-- assign roles 
+assign roles 
 ```cli
 az role assignment create --assignee "<user@domain>" \
 --role "Azure Event Hubs Data Owner" \
 --scope "<your-resource-id>"
 ```
 
-2. [Connection String](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-python-get-started-send?tabs=connection-string%2Croles-azure-cli#tabpanel_1_connection-string)
+2.2. [Connection String](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-python-get-started-send?tabs=connection-string%2Croles-azure-cli#tabpanel_1_connection-string) is an easier way to establish and authorise the connection between Event Hubs and another application.
 
 ---
 ## Data Lake 
-- NFS 3.0 when creating the storage account
+1. NFS 3.0 when creating the storage account
 
 - Access Key - found it in the specific Azure Data Lake account, this is an easier solution to mount `Databricks` to `Azure Data Lake`
 ---
 ## Databricks
     to run spark job to do `join` and 'transformation'
--  [mount Data Lake folder to Databricks](Databricks/accesskey_mount.ipynb) - this allows the synchronisation so that 'spark job' can access to `Data Lake files`
-- [spark on databricks](Databricks/spark_azure.ipynb)
+-  [Mount Data Lake folder to Databricks](Databricks/accesskey_mount.ipynb) - this allows the synchronisation so that 'spark job' can access to `Data Lake files`
+
+- [Spark on databricks](Databricks/spark_azure.ipynb)
  1. Define schema: `StructType` defines the schema for the data frame, with each field specified using the `StructField` type. This is to keep all columns in an order, and reduce size of the data by re-defining datatypes.
  2. Join job: read and join all JSON format files saved in Data Lakes 
  3. Transformation: [Turnover] = [Date removed] - [Date listed]
