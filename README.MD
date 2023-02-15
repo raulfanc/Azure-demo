@@ -28,7 +28,7 @@
 
 ---
 ## Azure Set up
-Using [Terraform](Terraform) to set up Azure Infrastructure and Resources.
+Using [Terraform](./terraform/) to set up Azure Infrastructure and Resources.
 1. Data Lake
 2. Azure Functions
 3. Azure Data Factory
