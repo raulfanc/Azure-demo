@@ -1,6 +1,9 @@
 # Demo Overview
 `AS` a Data Engineer, `I WANTED TO` build a SERVERLESS infrastructure in Azure that simulates the behavior of a real-world big data system, `SO THAT` it can provide other team members (Data Scientists or Data Analysts) to access the processed data.
 
+## Design Flow
+![Design Flow](/Azure%20Demo%20Project%20Design.jpeg)
+
 ---
 ## Agile Project Management
 * [Trello](https://trello.com/b/UCqOkRNO/de-demo)
