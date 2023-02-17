@@ -2,7 +2,7 @@
 `AS` a Data Engineer, `I WANTED TO` build a SERVERLESS infrastructure in Azure that simulates the behavior of a real-world big data system, `SO THAT` it can provide other team members (Data Scientists or Data Analysts) to access the processed data.
 
 ## Design Flow
-![Design Flow](/Azure%20Demo%20Project%20Design.jpeg)
+![Design Flow](./Pics/Azure%20Demo%20Project%20Design.jpeg)
 
 ---
 ## Agile Project Management
@@ -25,6 +25,9 @@
 [Data Generator in Local](Stream/datagenerator_10s.ipynb): This Python Script to generate dummy JSON object every 10s - used car sales records, saved in [bronze data](Stream/bronze%20data/) folder. 
 
 [Data Generator in Azure](Stream/datagenerator_azure.ipynb): This Python Script to generate dummy data, which will be designed into `Azure Logic App`. It is a batch processing solution, and the data is generated in intervals (defined by the recurrence time)
+
+![Streaming Ingested Data](https://trello.com/1/cards/63e3737656bf822fd2db75b6/attachments/63ec96553be7f04183f4b5f1/download/image.png)
+
 
 ---
 ## Azure Set up
@@ -82,21 +85,49 @@ az role assignment create --assignee "<user@domain>" \
  2. Join job: read and join all JSON format files saved in Data Lakes 
  3. Transformation: [Turnover] = [Date removed] - [Date listed]
 
+--- 
+## Data Flow Management
+ 1. `raw folder` as hot-tier access, designed as a landing zone for all ingested data.
+ 2. `silver folder` as a hot-tier access, designed as a processed zone for all processed data.
+ 3. `archive folder` as a cold-tier access, to store those raw data which has been processed by [Spark job](./Databricks/spark_azure.ipynb). This can help reduce storage costs while still allowing us to access the JSON objects if needed.
 
+Because Databricks storage doesn't support wildcard search, so it is not ideal to code within the spark job. So, Logic App is here to manage the Data Flow.
+![Data Flow Management](https://trello.com/1/cards/63ec9e05b5774f777032a326/attachments/63ef059240cbe567e4601dd4/download/image.png)
 
+---
+---
+---
 
+# #To-do#
 
+## Cosmos DB (Data Warehouse)
 
-
-
-
-
-
-## To do
-[Data Management life circle](https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview) enables hot-tier and cold-tier.
-
-- [Create Create Secret Scope](https://adb-6040027147401400.0.azuredatabricks.net/?o=6040027147401400#secrets/createScope) - use this link to create a Secret Scope in `Databricks` so that the credentials will not expose when mounting `Azure Data Lake`
-
-- Create a Spark cluster: You can create an Azure HDInsight Spark cluster that will be used to process your JSON objects. You can configure your Spark cluster to read the JSON objects from your Data Lake Storage account, perform the necessary data transformations, and write the results to a separate Data Lake Storage account that will be used for storing the processed data.
 - Create an Azure Cosmos DB account: You can create an Azure Cosmos DB account that will be used to store the processed data. You can configure your Spark cluster to write the processed data to your Cosmos DB account using a Cosmos DB output connector.
-- Configure cold storage tier for JSON objects: You can configure your Data Lake Storage account to automatically move the original JSON objects to a cold storage tier, such as Azure Archive Storage, after a certain period of time. This can help reduce storage costs while still allowing you to access the JSON objects if needed.
+- 
+- 
+- 
+---
+
+## API Management
+- 
+- 
+- 
+
+
+
+
+
+
+
+
+---
+---
+---
+---
+---
+---
+---
+## Reference
+- [Data Management life circle](https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview) enables hot-tier and cold-tier.
+
+- `Create Create Secret Scope` https://mydatabricks-instance#secrets/createScope (change mydatabricks-instance into my instance name)- use this link to create a Secret Scope in `Databricks` so that the credentials will not expose when mounting `Azure Data Lake`
