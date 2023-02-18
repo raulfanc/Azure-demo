@@ -19,17 +19,6 @@
 
 ----
 
-## Data Source
->Dummy data for this demo, the reason beings that this demo is to simulate the behavior of a real-world data source, i.e., "IoT data" or "web scraping".
-
-[Data Generator in Local](Stream/datagenerator_10s.ipynb): This Python Script to generate dummy JSON object every 10s - used car sales records, saved in [bronze data](Stream/bronze%20data/) folder. 
-
-[Data Generator in Azure](Stream/datagenerator_azure.ipynb): This Python Script to generate dummy data, which will be designed into `Azure Logic App`. It is a batch processing solution, and the data is generated in intervals (defined by the recurrence time)
-
-![Streaming Ingested Data](https://trello.com/1/cards/63e3737656bf822fd2db75b6/attachments/63ec96553be7f04183f4b5f1/download/image.png)
-
-
----
 ## Azure Set up
 Using [Terraform](./terraform/) to set up Azure Infrastructure and Resources.
 1. Data Lake
@@ -44,7 +33,19 @@ Using [Terraform](./terraform/) to set up Azure Infrastructure and Resources.
 10. App Registration
 
 ---
-## Event Hubs
+
+## Part 1. Data Source
+>Dummy data for this demo, the reason beings that this demo is to simulate the behavior of a real-world data source, i.e., "IoT data" or "web scraping".
+
+[Data Generator in Local](Stream/datagenerator_10s.ipynb): This Python Script to generate dummy JSON object every 10s - used car sales records, saved in [bronze data](Stream/bronze%20data/) folder. 
+
+[Data Generator in Azure](Stream/datagenerator_azure.ipynb): This Python Script to generate dummy data, which will be designed into `Azure Logic App`. It is a batch processing solution, and the data is generated in intervals (defined by the recurrence time)
+
+![Streaming Ingested Data](https://trello.com/1/cards/63e3737656bf822fd2db75b6/attachments/63ec96553be7f04183f4b5f1/download/image.png)
+
+---
+
+## Part 2. Event Hubs
 
 1. loading Libs Python
 ``` bash
@@ -71,12 +72,12 @@ az role assignment create --assignee "<user@domain>" \
 2.2. [Connection String](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-python-get-started-send?tabs=connection-string%2Croles-azure-cli#tabpanel_1_connection-string) is an easier way to establish and authorise the connection between Event Hubs and another application.
 
 ---
-## Data Lake 
+## Part 3. Data Lake 
 1. NFS 3.0 when creating the storage account
 
 - Access Key - found it in the specific Azure Data Lake account, this is an easier solution to mount `Databricks` to `Azure Data Lake`
 ---
-## Databricks
+## Part 4. Databricks
     to run spark job to do `join` and 'transformation'
 -  [Mount Data Lake folder to Databricks](Databricks/accesskey_mount.ipynb) - this allows the synchronisation so that 'spark job' can access to `Data Lake files`
 
@@ -86,13 +87,13 @@ az role assignment create --assignee "<user@domain>" \
  3. Transformation: [Turnover] = [Date removed] - [Date listed]
 
 --- 
-## Data Flow Management
+## Part 5. Data Flow Management
  1. `raw folder` as hot-tier access, designed as a landing zone for all ingested data.
  2. `silver folder` as a hot-tier access, designed as a processed zone for all processed data.
  3. `archive folder` as a cold-tier access, to store those raw data which has been processed by [Spark job](./Databricks/spark_azure.ipynb). This can help reduce storage costs while still allowing us to access the JSON objects if needed.
 
 Because Databricks storage doesn't support wildcard search, so it is not ideal to code within the spark job. So, Logic App is here to manage the Data Flow.
-![Data Flow Management](https://trello.com/1/cards/63ec9e05b5774f777032a326/attachments/63ef059240cbe567e4601dd4/download/image.png)
+![Data Flow Management](https://trello.com/1/cards/63ec9e05b5774f777032a326/attachments/63f085ac2c09970e41a9cd6f/download/image.png)
 
 ---
 ---
@@ -100,15 +101,16 @@ Because Databricks storage doesn't support wildcard search, so it is not ideal t
 
 # #To-do#
 
-## Cosmos DB (Data Warehouse)
+## Part 6. Cosmos DB (Data Warehouse)
 
-- Create an Azure Cosmos DB account: You can create an Azure Cosmos DB account that will be used to store the processed data. You can configure your Spark cluster to write the processed data to your Cosmos DB account using a Cosmos DB output connector.
-- 
-- 
-- 
+- Create an Azure Cosmos DB account
+- use ADF or Airflow to load silver data from Datalake
+- check Schema
+- ...
+
 ---
 
-## API Management
+## Part 7. API Management
 - 
 - 
 - 
