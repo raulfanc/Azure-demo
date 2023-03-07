@@ -107,29 +107,16 @@ Because Databricks storage doesn't support wildcard search, so it is not ideal t
 - use ADF or Airflow to load silver data from Datalake
 - check Schema
 - ...
-
 ---
 
 ## Part 7. API Management
 - 
 - 
 - 
-
-
-
-
-
-
-
-
 ---
----
----
----
----
----
----
+
 ## Reference
+
 - [Data Management life circle](https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview) enables hot-tier and cold-tier.
 
 - `Create Create Secret Scope` https://mydatabricks-instance#secrets/createScope (change mydatabricks-instance into my instance name)- use this link to create a Secret Scope in `Databricks` so that the credentials will not expose when mounting `Azure Data Lake`
